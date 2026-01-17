@@ -1,20 +1,58 @@
+/* 기본 배경 */
+body {
+  background-color: #141414;
+  color: white;
+  margin: 0;
+  font-family: "Pretendard", sans-serif;
+}
 .app {
-  padding: 20px;
+  padding: 0px;
 }
 
-/* Grid 레이아웃 */
-.movie-grid {
-  display: grid;
-  grid-template-columns: repeat(auto-fill, minmax(180px, 1fr));
-  gap: 20px;
+/* MOVIEAPP */
+.logo {
+  color: #e50914;
+  font-size: 35px;
+  font-weight: 900;
+  text-transform: uppercase;
+  letter-spacing: -1.5px;
+  cursor: pointer;
+  margin: 0;
 }
 
-/* MovieCard */
+/* NavBar */
+.nav {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 30px;
+  padding: 20px 50px;
+  background-color: #000000;
+}
+
+.nav-menu {
+  list-style: none;
+  margin: 0;
+  padding: 0;
+}
+.nav-menu a {
+  text-decoration: none;
+  color: #ffffff;
+  font-size: 20px;
+  font-weight: 800;
+  text-transform: uppercase;
+  transition: 0.2s;
+}
+
+/* 카드외부 */
 .movie-card {
   background-color: #1c1c1c;
-  border-radius: 8px;
+  border-radius: 10px;
   overflow: hidden;
-  transition: transform 0.2s ease;
+  transition: transform 0.3s ease;
+  cursor: pointer;
+  display: flex;
+  flex-direction: column;
 }
 
 .movie-card:hover {
@@ -24,35 +62,34 @@
 .movie-poster {
   width: 100%;
   display: block;
+  aspect-ratio: 2 / 3;
+  object-fit: cover;
 }
 
+/* 카드 내부 */
 .movie-info {
-  padding: 10px;
-
-  /* Flexbox 사용 */
+  padding: 12px;
   display: flex;
-  justify-content: space-between;
-  align-items: center;
+  flex-direction: column;
+  gap: 5px;
 }
 
 .movie-title {
-  font-size: 14px;
+  font-size: 15px;
   margin: 0;
+  font-weight: bold;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
 }
 
 .movie-rating {
   font-size: 13px;
   color: gold;
+  margin: 0;
 }
 
 /*Carousel*/
-.movie-card {
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-}
-
-.movie-card img {
-  border-radius: 8px;
-  width: 200px;
+.swiper {
+  padding: 20px 0 50px 0 !important;
 }
