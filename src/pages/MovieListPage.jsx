@@ -1,14 +1,53 @@
-import { useState } from "react";
-import movieListData from "../data/movieListData.json";
+import { useState, useEffect } from "react";
 import MovieCarousel from "../components/MovieCarousel";
+import { TMDB_API_BASE_URL } from "../constants/urls";
+import SkeletonCard from "../components/SkeletonCard";
 
 function MovieListPage() {
-  const [movies] = useState(movieListData.results);
+  const [movies, setMovies] = useState([]);
+  const [isLoading, setIsLoading] = useState(true);
+
+  useEffect(() => {
+    /*영화 가져오기*/
+    const getMovies = () => {
+      setIsLoading(true);
+      const url = `${TMDB_API_BASE_URL}/movie/popular?language=ko-KR&page=1`;
+
+      const options = {
+        method: "GET",
+        headers: {
+          accept: "application/json",
+          Authorization: `Bearer ${import.meta.env.VITE_TMDB_TOKEN}`,
+        },
+      };
+      fetch(url, options)
+        .then((response) => response.json())
+        .then((data) => {
+          /*성인 영화*/
+          const filtered = data.results.filter((movie) => movie.adult === false);
+          setMovies(filtered);
+          setIsLoading(false);
+        })
+        .catch((err) => console.error(err))
+        .finally(() => setIsLoading(false));
+    };
+
+    getMovies();
+  }, []);
 
   return (
-    <div>
-      <h1>Movie List</h1>
-      <MovieCarousel movies={movies} />
+    <div style={{ padding: "20px" }}>
+      <h1 style={{ color: "white" }}>인기 영화</h1>
+
+      {isLoading ? (
+        <div style={{ display: "flex", gap: "20px", overflow: "hidden" }}>
+          {[1, 2, 3, 4, 5].map((n) => (
+            <SkeletonCard key={n} />
+          ))}
+        </div>
+      ) : (
+        movies.length > 0 && <MovieCarousel movies={movies} />
+      )}
     </div>
   );
 }

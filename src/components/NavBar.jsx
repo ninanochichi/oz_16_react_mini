@@ -3,14 +3,13 @@ import { Link } from "react-router-dom";
 function NavBar() {
   return (
     <nav className="nav">
-      <h2 className="logo">🎬 MovieApp</h2>
+      <Link to="/" style={{ textDecoration: "none", color: "inherit" }}>
+        <h2 className="logo">MovieApp</h2>
+      </Link>
 
       <ul className="nav-menu">
         <li>
           <Link to="/">Home</Link>
-        </li>
-        <li>
-          <Link to="/details">Detail</Link>
         </li>
       </ul>
     </nav>
