@@ -10,10 +10,11 @@ function MovieCarousel({ movies }) {
   return (
     <Swiper
       modules={[Navigation, Pagination]}
-      spaceBetween={20}
-      slidesPerView={3}
-      navigation
+      spaceBetween={15}
+      slidesPerView={5}
+      navigation={true}
       pagination={{ clickable: true }}
+      className="mySwiper !overflow-visible !py-10"
     >
       {movies.map((movie) => (
         <SwiperSlide key={movie.id}>

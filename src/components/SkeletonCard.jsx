@@ -1,4 +1,5 @@
 import "./Skeleton.css";
+import React from "react";
 
 function SkeletonCard() {
   return (

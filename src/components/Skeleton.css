@@ -1,15 +1,15 @@
 .skeleton-card {
-  min-width: 200px;
+  width: 100%;
   background: #1a1a1a;
   border-radius: 10px;
   overflow: hidden;
-  padding-bottom: 10px;
+  padding-bottom: 15px;
 }
 
 /* 이미지 */
 .skeleton-img {
-  width: 200px;
-  height: 300px;
+  width: 100%;
+  aspect-ratio: 2 / 3;
   background: #333;
   animation: skeleton-glow 1.5s infinite ease-in-out;
 }
@@ -17,17 +17,17 @@
 /* 제목 */
 .skeleton-title {
   width: 80%;
-  height: 20px;
+  height: 18px;
   background: #333;
-  margin: 15px 10px 10px;
+  margin: 15px 10px 8px;
   border-radius: 4px;
   animation: skeleton-glow 1.5s infinite ease-in-out;
 }
 
-/* 평점 */
+/* 평점 정보 */
 .skeleton-info {
   width: 40%;
-  height: 15px;
+  height: 14px;
   background: #333;
   margin: 0 10px;
   border-radius: 4px;

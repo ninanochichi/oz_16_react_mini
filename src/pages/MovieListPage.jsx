@@ -36,17 +36,17 @@ function MovieListPage() {
   }, []);
 
   return (
-    <div style={{ padding: "20px" }}>
-      <h1 style={{ color: "white" }}>인기 영화</h1>
+    <div className="px-4 py-8 md:px-10 min-h-screen bg-base-100 text-base-content transition-colors duration-300">
+      <h1 className="text-2xl md:text-4xl font-bold mb-6 uppercase">인기 영화</h1>
 
       {isLoading ? (
-        <div style={{ display: "flex", gap: "20px", overflow: "hidden" }}>
+        <div className="grid grid-cols-5 gap-4">
           {[1, 2, 3, 4, 5].map((n) => (
             <SkeletonCard key={n} />
           ))}
         </div>
       ) : (
-        movies.length > 0 && <MovieCarousel movies={movies} />
+        <div className="w-full">{movies.length > 0 && <MovieCarousel movies={movies} />}</div>
       )}
     </div>
   );

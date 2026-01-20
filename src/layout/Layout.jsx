@@ -1,10 +1,10 @@
-import { Outlet } from "react-router-dom";
+import { Outlet } from "react-router";
 import NavBar from "../components/NavBar";
 
-function Layout() {
+function Layout({ theme, toggleTheme }) {
   return (
-    <div className="app">
-      <NavBar />
+    <div className="min-h-screen bg-base-100 text-base-content transition-colors duration-300">
+      <NavBar theme={theme} toggleTheme={toggleTheme} />
       <main>
         <Outlet />
       </main>

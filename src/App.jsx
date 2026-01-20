@@ -1,17 +1,29 @@
-import { lazy, Suspense } from "react";
-import { Routes, Route } from "react-router-dom";
+import { lazy, Suspense, useEffect, useState } from "react";
+import { Routes, Route } from "react-router";
 import Layout from "./layout/Layout";
 import "./App.css";
 import SkeletonCard from "./components/SkeletonCard";
 
 const MovieListPage = lazy(() => import("./pages/MovieListPage"));
 const MovieDetailPage = lazy(() => import("./pages/MovieDetailPage"));
+const SearchPage = lazy(() => import("./pages/SearchPage"));
 
 function App() {
+  const [theme, setTheme] = useState(() => localStorage.getItem("theme") || "light");
+
+  useEffect(() => {
+    document.documentElement.setAttribute("data-theme", theme);
+    localStorage.setItem("theme", theme);
+  }, [theme]);
+
+  const toggleTheme = () => {
+    setTheme((prev) => (prev === "light" ? "dark" : "light"));
+  };
+
   return (
     <Suspense
       fallback={
-        <div style={{ display: "flex", gap: "20px", padding: "20px", background: "#000" }}>
+        <div className="flex gap-5 p-5 bg-black">
           <SkeletonCard />
           <SkeletonCard />
           <SkeletonCard />
@@ -20,9 +32,10 @@ function App() {
       }
     >
       <Routes>
-        <Route element={<Layout />}>
+        <Route element={<Layout theme={theme} toggleTheme={toggleTheme} />}>
           <Route path="/" element={<MovieListPage />} />
           <Route path="/details/:movieId" element={<MovieDetailPage />} />
+          <Route path="/search" element={<SearchPage />} />
         </Route>
       </Routes>
     </Suspense>
