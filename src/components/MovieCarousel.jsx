@@ -8,6 +8,7 @@ import MovieCard from "./MovieCard";
 
 function MovieCarousel({ movies }) {
   return (
+    /* 캐러셀 */
     <Swiper
       modules={[Navigation, Pagination]}
       spaceBetween={15}
@@ -16,6 +17,7 @@ function MovieCarousel({ movies }) {
       pagination={{ clickable: true }}
       className="mySwiper !overflow-visible !py-10"
     >
+      {/* 슬라이드 */}
       {movies.map((movie) => (
         <SwiperSlide key={movie.id}>
           <MovieCard movie={movie} />

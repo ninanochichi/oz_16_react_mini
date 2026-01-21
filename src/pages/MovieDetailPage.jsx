@@ -3,10 +3,12 @@ import { useParams } from "react-router";
 import { TMDB_API_BASE_URL, TMDB_IMAGE_BASE_URL, TMDB_BACKDROP_BASE_URL } from "../constants/urls";
 
 function MovieDetailPage() {
+  /* URL 파라미터 */
   const { movieId } = useParams();
   const [movie, setMovie] = useState(null);
 
   useEffect(() => {
+    /* API 호출 */
     const getMovieDetail = async () => {
       const baseUrl = TMDB_API_BASE_URL.endsWith("/") ? TMDB_API_BASE_URL.slice(0, -1) : TMDB_API_BASE_URL;
 
@@ -41,12 +43,16 @@ function MovieDetailPage() {
 
   // 로딩
   if (!movie) {
-    return <div style={{ color: "white", padding: "20px", textAlign: "center", fontSize: "24px" }}>로딩 중...</div>;
+    return (
+      <div className="flex justify-center items-center min-h-screen bg-[#141414] text-white text-2xl font-bold">
+        로딩 중...
+      </div>
+    );
   }
 
   return (
     <div className="min-h-screen bg-[#141414] text-white">
-      {/* 배경 이미지 */}
+      {/* 상단 배경 이미지 */}
       <div className="relative h-[50vh] w-full">
         <img
           src={`${TMDB_BACKDROP_BASE_URL}${movie.backdrop_path}`}

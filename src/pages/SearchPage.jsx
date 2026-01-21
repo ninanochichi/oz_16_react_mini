@@ -4,6 +4,7 @@ import { TMDB_API_BASE_URL } from "../constants/urls";
 import MovieCard from "../components/MovieCard";
 
 function SearchPage() {
+  /* url에서 mq 호출 */
   const [searchParams] = useSearchParams();
   const mq = searchParams.get("mq");
 
@@ -11,11 +12,13 @@ function SearchPage() {
   const [isLoading, setIsLoading] = useState(false);
 
   useEffect(() => {
+    /* 예외 처리 : 검색어 없으면 초기화 */
     if (!mq) {
       setMovies([]);
       return;
     }
 
+    /* API 호출 : 검색어 맞게 */
     const fetchMovies = async () => {
       setIsLoading(true);
       try {
@@ -51,7 +54,7 @@ function SearchPage() {
           <p className="text-gray-400">영화 제목을 입력해 보세요!</p>
         </div>
       ) : isLoading ? (
-        // 로딩 중
+        /* 로딩중 */
         <div className="flex justify-center mt-20">
           <p className="text-xl animate-pulse text-gray-400">영화 데이터를 열심히 찾고 있어요...</p>
         </div>
@@ -62,11 +65,12 @@ function SearchPage() {
             🔍 '{mq}' <span className="text-gray-400">검색 결과</span>
           </h2>
 
+          {/* 결과 렌더링 */}
           <div className="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 lg:grid-cols-5 xl:grid-cols-6 gap-x-4 gap-y-10">
             {movies.length > 0 ? (
               movies.map((movie) => <MovieCard key={movie.id} movie={movie} />)
             ) : (
-              // 결과 없음
+              /* 결과 없음 */
               <div className="col-span-full mt-20 text-center space-y-4">
                 <p className="text-2xl font-bold text-gray-300">⚠️ '{mq}'에 대한 검색 결과가 없네요.</p>
                 <p className="text-gray-500">철자가 틀렸거나 등록되지 않은 영화일 수 있습니다.</p>
