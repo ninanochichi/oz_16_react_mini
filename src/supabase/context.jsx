@@ -25,6 +25,23 @@ export const SupabaseProvider = ({ children }) => {
     if (error) console.error("카카오 로그인 에러:", error.message);
   };
 
+  /* 구글 로그인 실행 */
+  const loginWithGoogle = async () => {
+    const { data, error } = await supabase.auth.signInWithOAuth({
+      provider: "google",
+      options: {
+        /* 로그인하고 사이트로 다시 */
+        redirectTo: window.location.origin,
+        queryParams: {
+          access_type: "offline",
+          prompt: "consent",
+        },
+      },
+    });
+
+    if (error) console.error("구글 로그인 에러:", error.message);
+  };
+
   /* 로그아웃 : Supabase 세션 종료, 초기화 */
   const logout = useCallback(async () => {
     await supabase.auth.signOut();
@@ -39,12 +56,19 @@ export const SupabaseProvider = ({ children }) => {
     } = await supabase.auth.getSession();
 
     if (session) {
+      const user = session.user;
+
       /* 객체 */
       const userInfo = {
-        id: session.user.id,
-        email: session.user.email || "Email Hidden",
-        userName: session.user.user_metadata.full_name || session.user.user_metadata.name || "카카오 사용자",
-        profileImageUrl: session.user.user_metadata.avatar_url || session.user.user_metadata.profile_image,
+        id: user.id,
+        email: user.email || "Email Hidden",
+        userName:
+          user.user_metadata?.full_name ||
+          user.user_metadata?.userName ||
+          user.user_metadata?.name ||
+          user.email?.split("@")[0] ||
+          "사용자",
+        profileImageUrl: user.user_metadata?.avatar_url || user.user_metadata?.profile_image || null,
       };
       /* 로컬스토리지 저장 : 새로고침 유지 */
       localStorage.setItem("userInfo", JSON.stringify(userInfo));
@@ -60,7 +84,11 @@ export const SupabaseProvider = ({ children }) => {
   }, [getUserInfo]);
 
   /* 외부 컴포넌트 */
-  return <AuthContext.Provider value={{ user, getUserInfo, logout, loginWithKakao }}>{children}</AuthContext.Provider>;
+  return (
+    <AuthContext.Provider value={{ user, getUserInfo, logout, loginWithKakao, loginWithGoogle }}>
+      {children}
+    </AuthContext.Provider>
+  );
 };
 /* 커스텀 훅 */
 export const useSupabaseAuth = () => useContext(AuthContext);

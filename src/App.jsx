@@ -10,6 +10,7 @@ const MovieDetailPage = lazy(() => import("./pages/MovieDetailPage"));
 const SearchPage = lazy(() => import("./pages/SearchPage"));
 const SignUpPage = lazy(() => import("./pages/SignUpPage"));
 const LoginPage = lazy(() => import("./pages/LoginPage"));
+const MyPage = lazy(() => import("./pages/MyPage"));
 
 function App() {
   const [theme, setTheme] = useState(() => localStorage.getItem("theme") || "light");
@@ -64,6 +65,7 @@ function App() {
           <Route path="/search" element={<SearchPage />} />
           <Route path="/signup" element={<SignUpPage />} />
           <Route path="/login" element={<LoginPage />} />
+          <Route path="/mypage" element={<MyPage />} />
         </Route>
       </Routes>
     </Suspense>
