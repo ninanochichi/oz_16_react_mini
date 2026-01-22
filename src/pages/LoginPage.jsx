@@ -4,10 +4,12 @@ import { supabase } from "../supabase/client";
 import FormInput from "../components/FormInput";
 import { useSupabaseAuth } from "../supabase/context";
 
+const GOOGLE_LOGO_URL = "https://www.gstatic.com/firebasejs/ui/2.0.0/images/auth/google.svg";
+
 const LoginPage = () => {
   const navigate = useNavigate();
   /* Context API: 전역 상태 업데이트 함수 가져오기 */
-  const { getUserInfo, loginWithKakao } = useSupabaseAuth();
+  const { getUserInfo, loginWithKakao, loginWithGoogle } = useSupabaseAuth();
 
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
@@ -46,18 +48,22 @@ const LoginPage = () => {
         <h1 className="text-3xl font-bold text-white mb-8">로그인</h1>
         <form onSubmit={handleLogin}>
           <FormInput
+            id="login-email"
             label="이메일"
             type="email"
             value={email}
             onChange={(e) => setEmail(e.target.value)}
             placeholder="이메일"
+            error={errors.email}
           />
           <FormInput
+            id="login-password"
             label="비밀번호"
             type="password"
             value={password}
             onChange={(e) => setPassword(e.target.value)}
             placeholder="비밀번호"
+            error={errors.password}
           />
           <button type="submit" className="w-full bg-red-600 text-white font-bold py-3 rounded mt-6 hover:bg-red-700">
             로그인
@@ -74,9 +80,19 @@ const LoginPage = () => {
           <button
             type="button"
             onClick={loginWithKakao}
-            className="w-full bg-[#FEE500] text-black font-bold py-3 rounded flex items-center justify-center hover:bg-[#FADB00] transition-colors"
+            className="w-full bg-[#FEE500] text-black font-bold py-3 rounded flex items-center justify-center hover:bg-[#FADB00] transition-colors mb-3"
           >
             카카오톡으로 시작하기
+          </button>
+
+          {/* 구글 로그인 버튼 */}
+          <button
+            type="button"
+            onClick={loginWithGoogle}
+            className="w-full bg-white text-black font-bold py-3 rounded flex items-center justify-center hover:bg-gray-100 transition-colors border border-gray-300"
+          >
+            <img src={GOOGLE_LOGO_URL} alt="google" className="w-5 h-5 mr-2" />
+            구글로 시작하기
           </button>
         </div>
       </div>

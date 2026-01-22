@@ -4,7 +4,7 @@ import { useDebounce } from "../hooks/useDebounce";
 import NavButton from "./NavButton";
 import { useSupabaseAuth } from "../supabase/context";
 
-const DEFAULT_PHOTO = "https://wallpapers.com/images/hd/netflix-profile-pictures-1000-x-1000-v0h1ih4a2ms1m5ka.jpg";
+import { DEFAULT_PHOTO } from "../constants/urls";
 
 function NavBar({ theme, toggleTheme }) {
   const navigate = useNavigate();

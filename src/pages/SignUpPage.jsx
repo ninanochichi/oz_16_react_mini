@@ -66,6 +66,7 @@ const SignUpPage = () => {
         <h1 className="text-3xl font-bold !text-gray-900 dark:!text-white mb-8 text-left">회원가입</h1>
         {/* 입력칸 */}
         <FormInput
+          id="signup-name"
           label="이름"
           name="userName"
           value={formData.userName}
@@ -74,6 +75,7 @@ const SignUpPage = () => {
           placeholder="이름을 입력해주세요"
         />
         <FormInput
+          id="signup-email"
           label="이메일"
           name="email"
           type="email"
@@ -83,6 +85,7 @@ const SignUpPage = () => {
           placeholder="이메일"
         />
         <FormInput
+          id="signup-password"
           label="비밀번호"
           name="password"
           type="password"
@@ -92,6 +95,7 @@ const SignUpPage = () => {
           placeholder="비밀번호"
         />
         <FormInput
+          id="signup-confirm-password"
           label="비밀번호 확인"
           name="confirmPassword"
           type="password"

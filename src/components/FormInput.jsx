@@ -1,12 +1,15 @@
 import React from "react";
 
-const FormInput = ({ label, type = "text", name, value, onChange, placeholder, error }) => {
+const FormInput = ({ id, label, type = "text", name, value, onChange, placeholder, error }) => {
   return (
     <div className="flex flex-col mb-4 w-full text-left">
-      <label className="text-sm font-semibold mb-1 !text-black dark:!text-white">{label}</label>
+      <label htmlFor={id} className="text-sm font-semibold mb-1 !text-black dark:!text-white">
+        {label}
+      </label>
 
       {/* 입력창 */}
       <input
+        id={id}
         type={type}
         name={name}
         value={value}
